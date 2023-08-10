@@ -17,8 +17,15 @@ library(shinyWidgets)
 library(ggsci)
 library(DT)
 
-data0 <- read_csv("FLR-2018-2022 (Contado RF, Estructurada 12 3 4, Venta FWD RF).csv")
-data1 <- read_excel("Liq. MS RF 1er Sem. 23 (Excluye Préstamos y Oper. Estr. 2RF).xlsx")
+# URL paths for the files on GitHub
+csv_file_path <- "https://github.com/kerbys13/MVP1/raw/main/FLR-2018-2022%20(Contado%20RF%2C%20Estructurada%2012%203%204%2C%20Venta%20FWD%20RF).csv"
+xlsx_file_path <- "https://github.com/kerbys13/MVP1/raw/main/Liq.%20MS%20RF%201er%20Sem.%2023%20(Excluye%20Pr%C3%A9stamos%20y%20Oper.%20Estr.%202RF).xlsx"
+
+# Read the CSV file directly from the GitHub URL
+data0 <- read.csv(csv_file_path)
+
+# Read the Excel files directly from the GitHub URLs
+data1 <- read.xlsx(xlsx_file_path, sheet = 1)
 
 data0 <- data0[,c(3:8,10:30)]
 data0 <- data0[,c(1:4,27,5:26)]
@@ -58,8 +65,13 @@ isines_vigentes <- unique(data_vigentes$ISIN)
 
 # ---- MERGE CON DATA BVRD ---- 
 
-maestro1 <- read_excel("MAESTRO-TITULOS.xlsx")
-maestro2 <- read_excel("MAESTRO-FINAL-2.xlsx")
+# URL paths for the files on GitHub
+maestro_titulos_path <- "https://github.com/kerbys13/MVP1/raw/main/MAESTRO-TITULOS.xlsx"
+maestro_final_path <- "https://github.com/kerbys13/MVP1/raw/main/MAESTRO-FINAL-2.xlsx"
+
+# Read the Excel files directly from the GitHub URLs
+maestro1 <- read.xlsx(maestro_titulos_path, sheet = 1)
+maestro2 <- read.xlsx(maestro_final_path, sheet = 1)
 
 names(maestro2)[4] <- "ISIN"
 names(maestro1)[6] <- "EMISOR"
